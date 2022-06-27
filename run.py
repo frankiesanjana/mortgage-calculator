@@ -7,6 +7,29 @@ import numpy as np
 import numpy_financial as npf
 from datetime import date
 
+
+def welcome_user():
+    """
+       Introductory screen for the user
+    """
+    while True:
+        print("Welcome to the mortgage calculator!")
+        print("Please select from the following options:")
+        print("Type 'a' to view examples of different mortgages, or 'b' to input your own details.")
+
+        choice = input("Enter your selection here:\n")
+
+        if choice == "a":
+            print("xxx")
+            break
+        elif choice == "b":
+            print("yyy")
+            break
+        else:
+            print("Invalid input, please try again.\n")
+
+welcome_user()
+
 class MortgageCalculator:
     """
        Defines the main class for mortgage calculation
@@ -25,8 +48,7 @@ class MortgageCalculator:
         """
         return f"A {self.years}-year mortgage for a total amount borrowed of ${self.mortgage} at an interest rate of {self.interest}%\nhas a monthly payment amount of ${self.monthly_payment}.\nThe total amount repaid on this mortgage by the end of the term will be ${self.total_repayment}.\n"
 
-        
-
+"""
 MortgageA = MortgageCalculator(4.0, 20, 250000)
 print(MortgageA.definition())
 
@@ -35,3 +57,4 @@ print(MortgageB.definition())
 
 MortgageC = MortgageCalculator(4.5, 30, 250000)
 print(MortgageC.definition())
+"""
