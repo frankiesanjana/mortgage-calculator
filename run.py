@@ -4,6 +4,7 @@
 
 import pandas as pd
 import numpy as np
+import numpy_financial as npf
 from datetime import date
 
 class MortgageCalculator:
@@ -14,12 +15,16 @@ class MortgageCalculator:
         self.interest = interest
         self.years = years
         self.mortgage = mortgage
+        
+        self.monthly_payment = round(-1 * npf.pmt(interest/1200, years*12, mortgage), 2)
 
     def definition(self):
         """
         Describes the mortgage
         """
-        return f"A {self.years}-year mortgage for a total amount borrowed of ${self.mortgage} at an interest rate of {self.interest}%"
+        return f"A {self.years}-year mortgage for a total amount borrowed of ${self.mortgage} at an interest rate of {self.interest}% has a monthly payment amount of ${self.monthly_payment}"
+
+        
 
 MortgageA = MortgageCalculator(4.0, 20, 250000)
 print(MortgageA.definition())
