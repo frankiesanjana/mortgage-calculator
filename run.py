@@ -17,12 +17,13 @@ class MortgageCalculator:
         self.mortgage = mortgage
         
         self.monthly_payment = round(-1 * npf.pmt(interest/1200, years*12, mortgage), 2)
+        self.total_repayment = round(self.monthly_payment * self.years * 12)
 
     def definition(self):
         """
         Describes the mortgage
         """
-        return f"A {self.years}-year mortgage for a total amount borrowed of ${self.mortgage} at an interest rate of {self.interest}% has a monthly payment amount of ${self.monthly_payment}"
+        return f"A {self.years}-year mortgage for a total amount borrowed of ${self.mortgage} at an interest rate of {self.interest}%\nhas a monthly payment amount of ${self.monthly_payment}.\nThe total amount repaid on this mortgage by the end of the term will be ${self.total_repayment}.\n"
 
         
 
