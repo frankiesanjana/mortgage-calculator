@@ -8,6 +8,37 @@ import numpy_financial as npf
 from datetime import date
 
 
+def choose_example():
+    while True:
+        print("You have chosen to view an example mortgage.")
+        print("Please select from the following options:")
+        print("Type 'a' to view details of a 20-year mortgage for a total amount borrowed of $250,000 with an interest rate of 4.0%")
+        print("Type 'b' to view details of a 30-year mortgage for a total amount borrowed of $250,000 with an interest rate of 4.0%")
+        print("Type 'c' to view details of a 30-year mortgage for a total amount borrowed of $250,000 with an interest rate of 4.5%")
+        print("Type 'd' to view details of all of the above mortgages at once.")
+        print("Type 'x' to exit and return to the main menu.")
+        
+        choice = input("Enter your selection here:\n")
+
+        if choice == "a":
+            print("xxx")
+            break
+        elif choice == "b":
+            print("yyy")
+            break
+        elif choice == "c":
+            print("zzz")
+            break
+        elif choice == "d":
+            print("aaa")
+            break
+        elif choice == "x":
+            print("bbb")
+            break
+        else:
+            print("Invalid input, please try again.\n")
+
+
 def welcome_user():
     """
        Introductory screen for the user
@@ -20,7 +51,7 @@ def welcome_user():
         choice = input("Enter your selection here:\n")
 
         if choice == "a":
-            print("xxx")
+            choose_example()
             break
         elif choice == "b":
             print("yyy")
@@ -29,6 +60,7 @@ def welcome_user():
             print("Invalid input, please try again.\n")
 
 welcome_user()
+
 
 class MortgageCalculator:
     """
