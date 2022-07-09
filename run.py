@@ -2,10 +2,10 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
-import pandas as pd
-import numpy as np
 import numpy_financial as npf
-from datetime import date
+import colorama
+from colorama import Fore, Back, Style
+colorama.init(autoreset=True)
 
 class MortgageCalculator:
     """
@@ -129,11 +129,11 @@ def welcome_user():
        Introductory screen for the user
     """
     while True:
-        print("Welcome to the mortgage calculator!")
-        print("Please select from the following options:")
+        print("Welcome to the mortgage calculator!\n")
+        print("Please select from the following options:\n")
         print("Type 'a' to view examples of different mortgages.")
-        print("Type 'b' to input your own details.")
-        print("Type 'z' to exit the mortgage calculator.")
+        print("Type 'b' to input your own details and view results.")
+        print("Type 'z' to exit the mortgage calculator.\n")
 
         choice = input("Enter your selection here:\n")
 
