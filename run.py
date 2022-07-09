@@ -68,6 +68,31 @@ def choose_example():
         else:
             print("Invalid input, please try again.\n")
 
+def own_details():
+    """
+       Allows user to input their own parameters and view mortgage costs
+    """
+    while True:
+        print("You have chosen to input details and view the resulting mortgage costs.")
+        print("Please select from the following options:")
+        print("Type 'a' to continue to input your details.")
+        print("Type 'x' to return to the main menu.")
+        print("Type 'z' to exit the mortgage calculator.")
+        
+        choice = input("Enter your selection here:\n")
+
+        if choice == "a":
+            print("xxx")
+        elif choice == "x":
+            welcome_user()
+            break
+        elif choice == "z":
+            print("Thank you for using the mortgage calculator and goodbye.")
+            break
+        else:
+            print("Invalid input, please try again.\n")
+
+
 def welcome_user():
     """
        Introductory screen for the user
@@ -76,7 +101,7 @@ def welcome_user():
         print("Welcome to the mortgage calculator!")
         print("Please select from the following options:")
         print("Type 'a' to view examples of different mortgages.")
-        print ("Type 'b' to input your own details.")
+        print("Type 'b' to input your own details.")
         print("Type 'z' to exit the mortgage calculator.")
 
         choice = input("Enter your selection here:\n")
@@ -85,7 +110,7 @@ def welcome_user():
             choose_example()
             break
         elif choice == "b":
-            print("yyy")
+            own_details()
             break
         elif choice == "z":
             print("Thank you for using the mortgage calculator and goodbye.")
