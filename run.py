@@ -81,10 +81,19 @@ def enter_details():
         print("borrowing a total of $250,000, enter the following:\n")
         print("4.25, 30, 250000")
 
-        user_interest, user_years, user_amount = input("Enter the values here:\n").split(",")
-
-        print(f"values are {user_interest}, {user_years}, {user_amount}")
-        break
+        try:
+            user_interest, user_years, user_amount = input("Enter the values here:\n").split(",")
+            num_interest = float(user_interest)
+            num_years = float(user_years)
+            num_amount = float(user_amount)
+            if (num_years > 0 and num_amount > 0):
+                print(f"values are {num_interest}, {num_years}, {num_amount}\n")
+            else:
+                print("The number of years and the amount borrowed must be a positive amount, please try again.\n")
+        except ValueError:
+            print("The values you have entered are not in the correct format, please try again.\n")
+        else:
+            break
 
 def own_details():
     """
