@@ -68,9 +68,27 @@ def choose_example():
         else:
             print("Invalid input, please try again.\n")
 
+def enter_details():
+    """
+       Menu to allow user to input their own parameters and view mortgage costs
+    """
+    while True:
+        print("Please enter the details for your mortgage.")
+        print("Enter the interest rate first, then the number of years")
+        print("the mortgage will run for, then the total amount borrowed.")
+        print("Use a comma to separate the values.\n")
+        print("For example, for a 4.25% interest rate on a 30-year mortgage")
+        print("borrowing a total of $250,000, enter the following:\n")
+        print("4.25, 30, 250000")
+
+        user_interest, user_years, user_amount = input("Enter the values here:\n").split(",")
+
+        print(f"values are {user_interest}, {user_years}, {user_amount}")
+        break
+
 def own_details():
     """
-       Allows user to input their own parameters and view mortgage costs
+       Menu to allow user to input their own parameters and view mortgage costs
     """
     while True:
         print("You have chosen to input details and view the resulting mortgage costs.")
@@ -82,7 +100,8 @@ def own_details():
         choice = input("Enter your selection here:\n")
 
         if choice == "a":
-            print("xxx")
+            enter_details()
+            break
         elif choice == "x":
             welcome_user()
             break
