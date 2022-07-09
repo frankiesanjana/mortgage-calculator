@@ -87,7 +87,10 @@ def enter_details():
             num_years = float(user_years)
             num_amount = float(user_amount)
             if (num_years > 0 and num_amount > 0):
-                print(f"values are {num_interest}, {num_years}, {num_amount}\n")
+                print(f"The details you have entered are an interest rate of {num_interest}%\n for {num_years} years, for an amount of ${num_amount}\n")
+                UserMortgage = MortgageCalculator(num_interest, num_years, num_amount)
+                print(UserMortgage.definition())
+                own_details()
             else:
                 print("The number of years and the amount borrowed must be a positive amount, please try again.\n")
         except ValueError:
