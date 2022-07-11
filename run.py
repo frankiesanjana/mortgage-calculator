@@ -25,7 +25,6 @@ class MortgageCalculator:
         """
         return f"A {self.years}-year mortgage for a total amount borrowed of ${self.mortgage} at an interest rate of {self.interest}%\nhas a monthly payment amount of ${self.monthly_payment}.\nThe total amount repaid on this mortgage by the end of the term will be ${self.total_repayment}.\n"
 
-
 """
     Defines some example mortgages to display to the user
 """
@@ -37,8 +36,9 @@ def choose_example():
     """
        Allows user to select an example mortgage and view details
     """
+    print(f"\n{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Hi, {username}!\n")
     while True:
-        print("You have chosen to view example mortgages.")
+        print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}You have chosen to view example mortgages.\n")
         print("Please select from the following options:")
         print("Type 'a' to view details of a 20-year mortgage for a total amount borrowed of $250,000 with an interest rate of 4.0%")
         print("Type 'b' to view details of a 30-year mortgage for a total amount borrowed of $250,000 with an interest rate of 4.0%")
@@ -102,8 +102,9 @@ def own_details():
     """
        Menu to allow user to input their own parameters and view mortgage costs
     """
+    print(f"\n{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Hi, {username}!\n")
     while True:
-        print("You have chosen to input details and view the resulting mortgage costs.")
+        print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}You have chosen to input details and view the resulting mortgage costs.\n")
         print("Please select from the following options:")
         print("Type 'a' to continue to input your details.")
         print("Type 'x' to return to the main menu.")
@@ -129,7 +130,7 @@ def welcome_user():
        Main menu of the mortgage calculator
     """
     while True:
-        print(f"\nWelcome to the main menu, {username}!\n")
+        print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}\nWelcome to the main menu, {username}!\n")
         print("Please select from the following options:\n")
         print("Type 'a' to view examples of different mortgages.")
         print("Type 'b' to input your own details and view results.")
@@ -153,8 +154,8 @@ def intro_page():
     """
        Introductory screen for the user
     """
-    print("Welcome to the mortgage calculator!\n")
-    print("""\
+    print(Fore.LIGHTGREEN_EX + Style.BRIGHT + "Welcome to the mortgage calculator!\n")
+    print(Fore.LIGHTCYAN_EX + Style.BRIGHT + """\
                            ====
                            !!!!
       ==========================
@@ -173,7 +174,7 @@ def intro_page():
   ||              @@@@            ||
 ******************____****************
 **************************************\n""")
-    print("This program allows you to enter your details")
+    print("This program allows you to enter your financial details")
     print("and see the costs associated with your mortgage.\n")
     while True:
         print("To get started, please enter your username.")
