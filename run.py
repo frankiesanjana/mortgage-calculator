@@ -63,7 +63,7 @@ def choose_example():
             welcome_user()
             break
         elif choice == "z":
-            print("Thank you for using the mortgage calculator and goodbye.")
+            print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
             print("Invalid input, please try again.\n")
@@ -118,7 +118,7 @@ def own_details():
             welcome_user()
             break
         elif choice == "z":
-            print("Thank you for using the mortgage calculator and goodbye.")
+            print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
             print("Invalid input, please try again.\n")
@@ -126,10 +126,10 @@ def own_details():
 
 def welcome_user():
     """
-       Introductory screen for the user
+       Main menu of the mortgage calculator
     """
     while True:
-        print("Welcome to the mortgage calculator!\n")
+        print(f"\nWelcome to the main menu, {username}!\n")
         print("Please select from the following options:\n")
         print("Type 'a' to view examples of different mortgages.")
         print("Type 'b' to input your own details and view results.")
@@ -144,11 +144,49 @@ def welcome_user():
             own_details()
             break
         elif choice == "z":
-            print("Thank you for using the mortgage calculator and goodbye.")
+            print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
             print("Invalid input, please try again.\n")
 
-welcome_user()
+def intro_page():
+    """
+       Introductory screen for the user
+    """
+    print("Welcome to the mortgage calculator!\n")
+    print("""\
+                           ====
+                           !!!!
+      ==========================
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  ||      _____          _____    ||
+  ||      | | |          | | |    ||
+  ||      |-|-|          |-|-|    ||
+  ||      #####          #####    ||
+  ||                              ||
+  ||      _____   ____   _____    ||
+  ||      | | |   @@@@   | | |    ||
+  ||      |-|-|   @@@@   |-|-|    ||
+  ||      #####   @@*@   #####    ||
+  ||              @@@@            ||
+******************____****************
+**************************************\n""")
+    print("This program allows you to enter your details")
+    print("and see the costs associated with your mortgage.\n")
+    while True:
+        print("To get started, please enter your username.")
+        print("Usernames must be between 2 and 15 characters,")
+        print("and should contain only letters from a to z.\n")
 
+        global username
+        username = input("Enter your username here:\n")
 
+        if username.isalpha() and len(username) >1 and len(username) < 16:
+            welcome_user()
+            break
+        else:
+            print("The username you have entered is not valid, please try again.\n")
+
+intro_page()
