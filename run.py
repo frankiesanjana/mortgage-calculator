@@ -1,17 +1,14 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
 """
 Import external libraries for the program
 Connect APIs and allow access via credentials file
 """
+import gspread
+from google.oauth2.service_account import Credentials
 import pandas as pd
 import numpy_financial as npf
 import colorama
 from colorama import Fore, Style
 colorama.init(autoreset=True)
-import gspread
-from google.oauth2.service_account import Credentials
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -24,6 +21,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('mortgage_database')
 stored_data = SHEET.worksheet('database')
+
 
 class MortgageCalculator:
     """
@@ -43,12 +41,12 @@ class MortgageCalculator:
         """
         return f"{Fore.LIGHTCYAN_EX}{Style.BRIGHT}A {self.years}-year mortgage for a total amount borrowed of ${self.mortgage} at an interest rate of {self.interest}%\nhas a monthly payment amount of ${self.monthly_payment}.\n\nThe total amount repaid on this mortgage by the end of the term will be ${self.total_repayment}.\n"
 
-"""
-    Defines some example mortgages to display to the user
-"""
+
+# Defines some example mortgages to display to the user
 MortgageA = MortgageCalculator(4.0, 20, 250000)
 MortgageB = MortgageCalculator(4.0, 30, 250000)
 MortgageC = MortgageCalculator(4.5, 30, 250000)
+
 
 def choose_example():
     """
@@ -64,7 +62,7 @@ def choose_example():
         print("Type 'd' to view details of all of the above mortgages at once.")
         print("Type 'x' to return to the main menu.")
         print("Type 'z' to exit the mortgage calculator.")
-        
+
         choice = input("Enter your selection here:\n")
 
         if choice == "a":
@@ -81,10 +79,11 @@ def choose_example():
             welcome_user()
             break
         elif choice == "z":
-            print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
+            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\nThank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
-            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
+            print(Fore.LIGHTYELLOW_EX + "\nInvalid input, please try again.\n")
+
 
 def save_details():
     """
@@ -116,7 +115,7 @@ def save_details():
             welcome_user()
             break
         elif save == "z":
-            print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
+            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\nThank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
@@ -154,6 +153,7 @@ def enter_details():
         else:
             break
 
+
 def own_details():
     """
        Menu to allow user to input their own parameters and view mortgage costs
@@ -165,7 +165,7 @@ def own_details():
         print("Type 'a' to continue to input your details.")
         print("Type 'x' to return to the main menu.")
         print("Type 'z' to exit the mortgage calculator.")
-        
+
         choice = input("Enter your selection here:\n")
 
         if choice == "a":
@@ -175,7 +175,7 @@ def own_details():
             welcome_user()
             break
         elif choice == "z":
-            print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
+            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\nThank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
@@ -205,10 +205,11 @@ def welcome_user():
             retrieve_saved_details()
             break
         elif choice == "z":
-            print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
+            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\nThank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
+
 
 def retrieve_saved_details():
     """
@@ -219,7 +220,7 @@ def retrieve_saved_details():
         df = pd.DataFrame(stored_data.get_all_records())
         user_record = df.loc[df['username'] == username].to_string(index=False)
         print(user_record)
-        while True:    
+        while True:
             print("\nWhat would you like to do next?")
             print("Type 'a' to input further details.")
             print("Type 'x' to return to the main menu.")
@@ -234,7 +235,7 @@ def retrieve_saved_details():
                 welcome_user()
                 break
             elif choice == "z":
-                print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
+                print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\nThank you for using the mortgage calculator and goodbye, {username}.")
                 break
             else:
                 print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
@@ -242,6 +243,7 @@ def retrieve_saved_details():
         print(Fore.LIGHTYELLOW_EX + "\nYou do not currently have any details stored.")
         print(Fore.LIGHTYELLOW_EX + "Returning to the main menu...")
         welcome_user()
+
 
 def returning_user():
     """
@@ -261,9 +263,14 @@ def returning_user():
             welcome_user()
             break
         else:
-            print("Username not found, please try again.")
+            print(Fore.LIGHTYELLOW_EX + "\nUsername not found, please try again.")
+
 
 def new_username():
+    """
+       Welcome screen for new users
+       where they can set a username
+    """
     while True:
         print("To get started, please enter your username.")
         print("Usernames must be between 2 and 15 characters,")
@@ -272,11 +279,15 @@ def new_username():
         global username
         username = input("Enter your username here:\n")
 
-        if username.isalpha() and len(username) >1 and len(username) < 16:
+        if stored_data.find(username, in_column=1):
+            print(Fore.LIGHTYELLOW_EX + "\nSorry, that username has already been taken.")
+            print(Fore.LIGHTYELLOW_EX + "Please choose an alternative username.\n")
+        elif username.isalpha() and len(username) > 1 and len(username) < 16:
             welcome_user()
             break
         else:
             print(Fore.LIGHTYELLOW_EX + "\nThe username you have entered is not valid, please try again.\n")
+
 
 def intro_page():
     """
@@ -309,7 +320,7 @@ def intro_page():
         print("Enter 2 if you have not previously saved your information in the mortgage calculator.\n")
 
         type = input("Please enter your choice here:\n")
-    
+
         if type == "1":
             returning_user()
             break
@@ -318,5 +329,6 @@ def intro_page():
             break
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
+
 
 intro_page()
