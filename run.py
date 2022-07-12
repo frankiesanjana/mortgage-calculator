@@ -22,6 +22,7 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('mortgage_database')
+stored_data = SHEET.worksheet('database')
 
 class MortgageCalculator:
     """
@@ -87,7 +88,7 @@ def choose_example():
 def save_details():
     """
        Menu to allow user to save the details they have entered,
-       submit alternative details or choose another option       
+       submit alternative details or choose another option
     """
     while True:
         print(Fore.LIGHTRED_EX + Style.BRIGHT + "Would you like to save these details?\n")
@@ -202,6 +203,33 @@ def welcome_user():
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
+def returning_user():
+    print("Welcome back! Please enter your username.\n")
+    while True:
+        global username
+        username = input("Enter your username here:\n")
+
+        if stored_data.find(username, in_column=1):
+            print("Found")
+            break
+        else:
+            print("not found, please try again")
+
+def new_username():
+    while True:
+        print("To get started, please enter your username.")
+        print("Usernames must be between 2 and 15 characters,")
+        print("and should contain only letters from a to z.\n")
+
+        global username
+        username = input("Enter your username here:\n")
+
+        if username.isalpha() and len(username) >1 and len(username) < 16:
+            welcome_user()
+            break
+        else:
+            print(Fore.LIGHTYELLOW_EX + "\nThe username you have entered is not valid, please try again.\n")
+
 def intro_page():
     """
        Introductory screen for the user
@@ -229,17 +257,18 @@ def intro_page():
     print("This program allows you to enter your financial details")
     print("and see the costs associated with your mortgage.\n")
     while True:
-        print("To get started, please enter your username.")
-        print("Usernames must be between 2 and 15 characters,")
-        print("and should contain only letters from a to z.\n")
+        print("To get started, please enter 1 if you have saved details in the mortgage calculator.")
+        print("Enter 2 if you have not previously saved your information in the mortgage calculator.\n")
 
-        global username
-        username = input("Enter your username here:\n")
-
-        if username.isalpha() and len(username) >1 and len(username) < 16:
-            welcome_user()
+        type = input("Please enter your choice here:\n")
+    
+        if type == "1":
+            returning_user()
+            break
+        elif type == "2":
+            new_username()
             break
         else:
-            print(Fore.LIGHTYELLOW_EX + "\nThe username you have entered is not valid, please try again.\n")
+            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
 intro_page()
