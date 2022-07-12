@@ -1,6 +1,14 @@
 # Your code goes here.
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
+'''
+Import external libraries for the program
+Connect APIs and allow access via credentials file
+'''
+import numpy_financial as npf
+import colorama
+from colorama import Fore, Style
+colorama.init(autoreset=True)
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -19,14 +27,6 @@ database = SHEET.worksheet('database')
 
 data = database.get_all_values()
 
-print(data)
-
-'''
-import numpy_financial as npf
-import colorama
-from colorama import Fore, Back, Style
-colorama.init(autoreset=True)
-
 class MortgageCalculator:
     """
        Defines the main class for mortgage calculation
@@ -43,7 +43,7 @@ class MortgageCalculator:
         """
         Describes the mortgage
         """
-        return f"A {self.years}-year mortgage for a total amount borrowed of ${self.mortgage} at an interest rate of {self.interest}%\nhas a monthly payment amount of ${self.monthly_payment}.\nThe total amount repaid on this mortgage by the end of the term will be ${self.total_repayment}.\n"
+        return f"{Fore.LIGHTCYAN_EX}{Style.BRIGHT}A {self.years}-year mortgage for a total amount borrowed of ${self.mortgage} at an interest rate of {self.interest}%\nhas a monthly payment amount of ${self.monthly_payment}.\n\nThe total amount repaid on this mortgage by the end of the term will be ${self.total_repayment}.\n"
 
 """
     Defines some example mortgages to display to the user
@@ -88,6 +88,36 @@ def choose_example():
         else:
             print("Invalid input, please try again.\n")
 
+def save_details():
+    """
+       Menu to allow user to save the details they have entered,
+       submit alternative details or choose another option       
+    """
+    while True:
+        print(Fore.LIGHTRED_EX + Style.BRIGHT + "Would you like to save these details?\n")
+        print("Please press 's' to save, or choose from the following options:")
+        print("Type 'a' to input some alternative details.")
+        print("Type 'x' to return to the main menu.")
+        print("Type 'z' to exit the mortgage calculator.")
+
+        save = input("Enter your selection here:\n")
+
+        if save == "s":
+            print("Great! Your details have been saved to the database.")
+            break
+        elif save == "a":
+            enter_details()
+            break
+        elif save == "x":
+            welcome_user()
+            break
+        elif save == "z":
+            print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
+            break
+        else:
+            print("Invalid input, please try again.\n")
+
+
 def enter_details():
     """
        Menu to allow user to input their own parameters and view mortgage costs
@@ -107,10 +137,11 @@ def enter_details():
             num_years = float(user_years)
             num_amount = float(user_amount)
             if (num_years > 0 and num_amount > 0):
-                print(f"The details you have entered are an interest rate of {num_interest}%\n for {num_years} years, for an amount of ${num_amount}\n")
+                print(f"\nThe details you have entered are an interest rate of {num_interest}%\n for {num_years} years, for an amount of ${num_amount}\n")
                 UserMortgage = MortgageCalculator(num_interest, num_years, num_amount)
                 print(UserMortgage.definition())
-                own_details()
+                save_details()
+                break
             else:
                 print("The number of years and the amount borrowed must be a positive amount, please try again.\n")
         except ValueError:
@@ -211,4 +242,3 @@ def intro_page():
             print("The username you have entered is not valid, please try again.\n")
 
 intro_page()
-'''
