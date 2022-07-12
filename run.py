@@ -5,6 +5,7 @@
 Import external libraries for the program
 Connect APIs and allow access via credentials file
 """
+import pandas as pd
 import numpy_financial as npf
 import colorama
 from colorama import Fore, Style
@@ -92,7 +93,7 @@ def save_details():
     """
     while True:
         print(Fore.LIGHTRED_EX + Style.BRIGHT + "Would you like to save these details?\n")
-        print("Please press 's' to save, or choose from the following options:")
+        print("Type 's' to save these details for future use.")
         print("Type 'a' to input some alternative details.")
         print("Type 'x' to return to the main menu.")
         print("Type 'z' to exit the mortgage calculator.")
@@ -105,6 +106,7 @@ def save_details():
             database = SHEET.worksheet('database')
             database.append_row(list_details)
             print("Great! Your details have been saved to the database.\n")
+            menu_returning_user()
             break
         elif save == "a":
             enter_details()
@@ -121,7 +123,7 @@ def save_details():
 
 def enter_details():
     """
-       Menu to allow user to input their own parameters and view mortgage costs
+       Section where the user enters their details
     """
     while True:
         print("Please enter the details for your mortgage.")
@@ -187,6 +189,7 @@ def welcome_user():
         print("Please select from the following options:\n")
         print("Type 'a' to view examples of different mortgages.")
         print("Type 'b' to input your own details and view results.")
+        print("Type 'c' to view your saved details and results.")
         print("Type 'z' to exit the mortgage calculator.\n")
 
         choice = input("Enter your selection here:\n")
@@ -196,6 +199,60 @@ def welcome_user():
             break
         elif choice == "b":
             own_details()
+            break
+        elif choice == "c":
+            retrieve_saved_details()
+            break
+        elif choice == "z":
+            print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
+            break
+        else:
+            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
+
+def retrieve_saved_details():
+    if stored_data.find(username, in_column=1):
+        print(Fore.LIGHTGREEN_EX + Style.BRIGHT + "\nThe details you currently have saved are:\n")
+        df = pd.DataFrame(stored_data.get_all_records())
+        print(df.loc[df['username'] == username])
+        while True:    
+            print("\nWhat would you like to do next?")
+            print("Type 'a' to input further details.")
+            print("Type 'x' to return to the main menu.")
+            print("Type 'z' to exit the mortgage calculator.")
+
+            choice = input("Enter your selection here:\n")
+
+            if choice == "a":
+                enter_details()
+                break
+            elif choice == "x":
+                welcome_user()
+                break
+            elif choice == "z":
+                print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
+                break
+            else:
+                print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
+    else:
+        print(Fore.LIGHTYELLOW_EX + "\nYou do not currently have any details stored.")
+        print(Fore.LIGHTYELLOW_EX + "Returning to the main menu...")
+        welcome_user()
+
+def menu_returning_user():
+    print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}\nWelcome back, {username}!")
+    while True:    
+        print("Please select from the following options:")
+        print("Type 'a' to view your saved details.")
+        print("Type 'x' to return to the main menu.")
+        print("Type 'z' to exit the mortgage calculator.")
+        
+        choice = input("Enter your selection here:\n")
+
+        if choice == "a":
+            retrieve_saved_details()
+            break
+        elif choice == "x":
+            welcome_user()
             break
         elif choice == "z":
             print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
@@ -210,10 +267,10 @@ def returning_user():
         username = input("Enter your username here:\n")
 
         if stored_data.find(username, in_column=1):
-            print("Found")
+            menu_returning_user()
             break
         else:
-            print("not found, please try again")
+            print("Username not found, please try again.")
 
 def new_username():
     while True:
