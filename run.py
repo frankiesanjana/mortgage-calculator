@@ -1,10 +1,10 @@
 # Your code goes here.
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
-'''
+"""
 Import external libraries for the program
 Connect APIs and allow access via credentials file
-'''
+"""
 import numpy_financial as npf
 import colorama
 from colorama import Fore, Style
@@ -22,10 +22,6 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('mortgage_database')
-
-database = SHEET.worksheet('database')
-
-data = database.get_all_values()
 
 class MortgageCalculator:
     """
@@ -86,7 +82,7 @@ def choose_example():
             print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
-            print("Invalid input, please try again.\n")
+            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
 def save_details():
     """
@@ -103,7 +99,11 @@ def save_details():
         save = input("Enter your selection here:\n")
 
         if save == "s":
-            print("Great! Your details have been saved to the database.")
+            list_details = [username, UserMortgage.interest, UserMortgage.years, UserMortgage.mortgage, UserMortgage.monthly_payment, UserMortgage.total_repayment]
+            print("Saving your details...\n")
+            database = SHEET.worksheet('database')
+            database.append_row(list_details)
+            print("Great! Your details have been saved to the database.\n")
             break
         elif save == "a":
             enter_details()
@@ -115,7 +115,7 @@ def save_details():
             print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
-            print("Invalid input, please try again.\n")
+            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
 
 def enter_details():
@@ -138,14 +138,15 @@ def enter_details():
             num_amount = float(user_amount)
             if (num_years > 0 and num_amount > 0):
                 print(f"\nThe details you have entered are an interest rate of {num_interest}%\n for {num_years} years, for an amount of ${num_amount}\n")
+                global UserMortgage
                 UserMortgage = MortgageCalculator(num_interest, num_years, num_amount)
                 print(UserMortgage.definition())
                 save_details()
                 break
             else:
-                print("The number of years and the amount borrowed must be a positive amount, please try again.\n")
+                print(Fore.LIGHTYELLOW_EX + "The number of years and the amount borrowed must be a positive amount, please try again.\n")
         except ValueError:
-            print("The values you have entered are not in the correct format, please try again.\n")
+            print(Fore.LIGHTYELLOW_EX + "The values you have entered are not in the correct format, please try again.\n")
         else:
             break
 
@@ -173,7 +174,7 @@ def own_details():
             print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
-            print("Invalid input, please try again.\n")
+            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
 
 def welcome_user():
@@ -199,7 +200,7 @@ def welcome_user():
             print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
-            print("Invalid input, please try again.\n")
+            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
 def intro_page():
     """
@@ -239,6 +240,6 @@ def intro_page():
             welcome_user()
             break
         else:
-            print("The username you have entered is not valid, please try again.\n")
+            print(Fore.LIGHTYELLOW_EX + "\nThe username you have entered is not valid, please try again.\n")
 
 intro_page()
