@@ -217,7 +217,8 @@ def retrieve_saved_details():
     if stored_data.find(username, in_column=1):
         print(Fore.LIGHTGREEN_EX + Style.BRIGHT + "\nThe details you currently have saved are:\n")
         df = pd.DataFrame(stored_data.get_all_records())
-        print(df.loc[df['username'] == username])
+        user_record = df.loc[df['username'] == username].to_string(index=False)
+        print(user_record)
         while True:    
             print("\nWhat would you like to do next?")
             print("Type 'a' to input further details.")
