@@ -33,7 +33,7 @@ class MortgageCalculator:
         self.interest = interest
         self.years = years
         self.mortgage = mortgage
-        
+
         self.monthly_payment = round(-1 * npf.pmt(interest/1200, years*12, mortgage), 2)
         self.total_repayment = round(self.monthly_payment * self.years * 12)
 
@@ -106,7 +106,8 @@ def save_details():
             database = SHEET.worksheet('database')
             database.append_row(list_details)
             print("Great! Your details have been saved to the database.\n")
-            menu_returning_user()
+            print("\nTaking you to the main menu...")
+            welcome_user()
             break
         elif save == "a":
             enter_details()
@@ -210,6 +211,9 @@ def welcome_user():
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
 def retrieve_saved_details():
+    """
+       Allows user to view details they have stored in the database
+    """
     if stored_data.find(username, in_column=1):
         print(Fore.LIGHTGREEN_EX + Style.BRIGHT + "\nThe details you currently have saved are:\n")
         df = pd.DataFrame(stored_data.get_all_records())
@@ -238,36 +242,22 @@ def retrieve_saved_details():
         print(Fore.LIGHTYELLOW_EX + "Returning to the main menu...")
         welcome_user()
 
-def menu_returning_user():
-    print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}\nWelcome back, {username}!")
-    while True:    
-        print("Please select from the following options:")
-        print("Type 'a' to view your saved details.")
-        print("Type 'x' to return to the main menu.")
-        print("Type 'z' to exit the mortgage calculator.")
-        
-        choice = input("Enter your selection here:\n")
-
-        if choice == "a":
-            retrieve_saved_details()
-            break
-        elif choice == "x":
-            welcome_user()
-            break
-        elif choice == "z":
-            print(f"Thank you for using the mortgage calculator and goodbye, {username}.")
-            break
-        else:
-            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
-
 def returning_user():
-    print("Welcome back! Please enter your username.\n")
+    """
+       Welcome screen for returning users
+    """
+    print("Welcome back! Please enter your username.")
+    print("Alternatively, type 'n' to create a new username")
     while True:
         global username
         username = input("Enter your username here:\n")
 
-        if stored_data.find(username, in_column=1):
-            menu_returning_user()
+        if username == 'n':
+            new_username()
+            break
+        elif stored_data.find(username, in_column=1):
+            print("\nTaking you to the main menu...")
+            welcome_user()
             break
         else:
             print("Username not found, please try again.")
