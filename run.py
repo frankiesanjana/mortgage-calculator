@@ -286,8 +286,8 @@ def new_username():
             welcome_user()
             break
         else:
-            print(Fore.LIGHTYELLOW_EX + "\nThe username you have entered is not valid, please try again.\n")
-
+            message = "\nThe username you have entered is not valid, please try again.\n"
+            print(f"{Fore.LIGHTYELLOW_EX}{message}")
 
 def intro_page():
     """
@@ -295,24 +295,13 @@ def intro_page():
     """
     print(Fore.LIGHTGREEN_EX + Style.BRIGHT + "Welcome to the mortgage calculator!\n")
     print(Fore.LIGHTCYAN_EX + Style.BRIGHT + """\
-                           ====
-                           !!!!
-      ==========================
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  ||      _____          _____    ||
-  ||      | | |          | | |    ||
-  ||      |-|-|          |-|-|    ||
-  ||      #####          #####    ||
-  ||                              ||
-  ||      _____   ____   _____    ||
-  ||      | | |   @@@@   | | |    ||
-  ||      |-|-|   @@@@   |-|-|    ||
-  ||      #####   @@*@   #####    ||
-  ||              @@@@            ||
-******************____****************
-**************************************\n""")
+        `'::.
+    _________H ,%%&%,
+   /\     _   \%&&%%&%
+  /  \___/^\___\%&%%&&
+  |  | []   [] |%\Y&%'
+  |  |   .-.   | ||  
+~~@._|@@_|||_@@|~||~~~~~~~~~~~~~\n""")
     print("This program allows you to enter your financial details")
     print("and see the costs associated with your mortgage.\n")
     while True:
