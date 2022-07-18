@@ -32,14 +32,20 @@ class MortgageCalculator:
         self.years = years
         self.mortgage = mortgage
 
-        self.monthly_payment = round(-1 * npf.pmt(interest/1200, years*12, mortgage), 2)
+        self.monthly_payment = \
+            round(-1 * npf.pmt(interest/1200, years*12, mortgage), 2)
         self.total_repayment = round(self.monthly_payment * self.years * 12)
 
     def definition(self):
         """
         Describes the mortgage
         """
-        return f"{Fore.LIGHTCYAN_EX}{Style.BRIGHT}A {self.years}-year mortgage for a total amount borrowed of ${self.mortgage} at an interest rate of {self.interest}%\nhas a monthly payment amount of ${self.monthly_payment}.\n\nThe total amount repaid on this mortgage by the end of the term will be ${self.total_repayment}.\n"
+        return f"{Fore.LIGHTCYAN_EX}{Style.BRIGHT}A {self.years}-year mortgage \
+for a total amount borrowed of ${self.mortgage} at an interest \
+rate of {self.interest}%\nhas a monthly payment amount of \
+${self.monthly_payment}.\n\nThe total amount repaid on \
+this mortgage by the end of the term \
+will be ${self.total_repayment}.\n"
 
 
 # Defines some example mortgages to display to the user
@@ -54,12 +60,16 @@ def choose_example():
     """
     print(f"\n{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Hi, {username}!\n")
     while True:
-        print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}You have chosen to view example mortgages.\n")
+        print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}You have chosen to view \
+example mortgages.\n")
         print("Please select from the following options:")
-        print("Type 'a' to view details of a 20-year mortgage for a total amount borrowed of $250,000 with an interest rate of 4.0%")
-        print("Type 'b' to view details of a 30-year mortgage for a total amount borrowed of $250,000 with an interest rate of 4.0%")
-        print("Type 'c' to view details of a 30-year mortgage for a total amount borrowed of $250,000 with an interest rate of 4.5%")
-        print("Type 'd' to view details of all of the above mortgages at once.")
+        print("Type 'a' to view details of a 20-year mortgage \
+\nfor a total amount borrowed of $250,000 with an interest rate of 4.0%")
+        print("Type 'b' to view details of a 30-year mortgage \
+\nfor a total amount borrowed of $250,000 with an interest rate of 4.0%")
+        print("Type 'c' to view details of a 30-year mortgage \
+\nfor a total amount borrowed of $250,000 with an interest rate of 4.5%")
+        print("Type 'd' to view details of all of these mortgages at once.")
         print("Type 'x' to return to the main menu.")
         print("Type 'z' to exit the mortgage calculator.")
 
@@ -79,7 +89,8 @@ def choose_example():
             welcome_user()
             break
         elif choice == "z":
-            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\nThank you for using the mortgage calculator and goodbye, {username}.")
+            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\n\
+Thank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
             print(Fore.LIGHTYELLOW_EX + "\nInvalid input, please try again.\n")
@@ -91,7 +102,8 @@ def save_details():
        submit alternative details or choose another option
     """
     while True:
-        print(Fore.LIGHTRED_EX + Style.BRIGHT + "Would you like to save these details?\n")
+        print(Fore.LIGHTRED_EX + Style.BRIGHT +
+              "Would you like to save these details?\n")
         print("Type 's' to save these details for future use.")
         print("Type 'a' to input some alternative details.")
         print("Type 'x' to return to the main menu.")
@@ -100,7 +112,10 @@ def save_details():
         save = input("Enter your selection here:\n")
 
         if save == "s":
-            list_details = [username, UserMortgage.interest, UserMortgage.years, UserMortgage.mortgage, UserMortgage.monthly_payment, UserMortgage.total_repayment]
+            list_details = [
+                username, UserMortgage.interest,
+                UserMortgage.years, UserMortgage.mortgage,
+                UserMortgage.monthly_payment, UserMortgage.total_repayment]
             print("Saving your details...\n")
             database = SHEET.worksheet('database')
             database.append_row(list_details)
@@ -115,7 +130,8 @@ def save_details():
             welcome_user()
             break
         elif save == "z":
-            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\nThank you for using the mortgage calculator and goodbye, {username}.")
+            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\n\
+Thank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
@@ -135,21 +151,26 @@ def enter_details():
         print("4.25, 30, 250000")
 
         try:
-            user_interest, user_years, user_amount = input("Enter the values here:\n").split(",")
+            user_interest, user_years, user_amount \
+                = input("Enter the values here:\n").split(",")
             num_interest = float(user_interest)
             num_years = float(user_years)
             num_amount = float(user_amount)
             if (num_years > 0 and num_amount > 0):
-                print(f"\nThe details you have entered are an interest rate of {num_interest}%\n for {num_years} years, for an amount of ${num_amount}\n")
+                print(f"\nThe details you have entered are an interest rate of \
+{num_interest}%\n for {num_years} years, for an amount of ${num_amount}\n")
                 global UserMortgage
-                UserMortgage = MortgageCalculator(num_interest, num_years, num_amount)
+                UserMortgage = MortgageCalculator(
+                    num_interest, num_years, num_amount)
                 print(UserMortgage.definition())
                 save_details()
                 break
             else:
-                print(Fore.LIGHTYELLOW_EX + "The number of years and the amount borrowed must be a positive amount, please try again.\n")
+                print(Fore.LIGHTYELLOW_EX + "The number of years and the amount borrowed \
+must be a positive amount, \nplease try again.\n")
         except ValueError:
-            print(Fore.LIGHTYELLOW_EX + "The values you have entered are not in the correct format, please try again.\n")
+            print(Fore.LIGHTYELLOW_EX + "The values you have entered are not in \
+the correct format, please try again.\n")
         else:
             break
 
@@ -160,7 +181,8 @@ def own_details():
     """
     print(f"\n{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Hi, {username}!\n")
     while True:
-        print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}You have chosen to input details and view the resulting mortgage costs.\n")
+        print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}You have chosen to input details \
+and view the resulting mortgage costs.\n")
         print("Please select from the following options:")
         print("Type 'a' to continue to input your details.")
         print("Type 'x' to return to the main menu.")
@@ -175,7 +197,8 @@ def own_details():
             welcome_user()
             break
         elif choice == "z":
-            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\nThank you for using the mortgage calculator and goodbye, {username}.")
+            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\n\
+Thank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
@@ -186,7 +209,8 @@ def welcome_user():
        Main menu of the mortgage calculator
     """
     while True:
-        print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}\nWelcome to the main menu, {username}!\n")
+        print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}\n\
+Welcome to the main menu, {username}!\n")
         print("Please select from the following options:\n")
         print("Type 'a' to view examples of different mortgages.")
         print("Type 'b' to input your own details and view results.")
@@ -205,7 +229,8 @@ def welcome_user():
             retrieve_saved_details()
             break
         elif choice == "z":
-            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\nThank you for using the mortgage calculator and goodbye, {username}.")
+            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\n\
+Thank you for using the mortgage calculator and goodbye, {username}.")
             break
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
@@ -216,7 +241,8 @@ def retrieve_saved_details():
        Allows user to view details they have stored in the database
     """
     if stored_data.find(username, in_column=1):
-        print(Fore.LIGHTGREEN_EX + Style.BRIGHT + "\nThe details you currently have saved are:\n")
+        print(Fore.LIGHTGREEN_EX + Style.BRIGHT +
+              "\nThe details you currently have saved are:\n")
         df = pd.DataFrame(stored_data.get_all_records())
         user_record = df.loc[df['username'] == username].to_string(index=False)
         print(user_record)
@@ -235,12 +261,15 @@ def retrieve_saved_details():
                 welcome_user()
                 break
             elif choice == "z":
-                print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\nThank you for using the mortgage calculator and goodbye, {username}.")
+                print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\n\
+Thank you for using the mortgage calculator and goodbye, {username}.")
                 break
             else:
-                print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
+                print(Fore.LIGHTYELLOW_EX +
+                      "Invalid input, please try again.\n")
     else:
-        print(Fore.LIGHTYELLOW_EX + "\nYou do not currently have any details stored.")
+        print(Fore.LIGHTYELLOW_EX +
+              "\nYou do not currently have any details stored.")
         print(Fore.LIGHTYELLOW_EX + "Returning to the main menu...")
         welcome_user()
 
@@ -263,7 +292,8 @@ def returning_user():
             welcome_user()
             break
         else:
-            print(Fore.LIGHTYELLOW_EX + "\nUsername not found, please try again.")
+            print(Fore.LIGHTYELLOW_EX +
+                  "\nUsername not found, please try again.")
 
 
 def new_username():
@@ -280,33 +310,40 @@ def new_username():
         username = input("Enter your username here:\n")
 
         if stored_data.find(username, in_column=1):
-            print(Fore.LIGHTYELLOW_EX + "\nSorry, that username has already been taken.")
-            print(Fore.LIGHTYELLOW_EX + "Please choose an alternative username.\n")
+            print(Fore.LIGHTYELLOW_EX +
+                  "\nSorry, that username has already been taken.")
+            print(Fore.LIGHTYELLOW_EX +
+                  "Please choose an alternative username.\n")
         elif username.isalpha() and len(username) > 1 and len(username) < 16:
             welcome_user()
             break
         else:
-            message = "\nThe username you have entered is not valid, please try again.\n"
-            print(f"{Fore.LIGHTYELLOW_EX}{message}")
+            print(Fore.LIGHTYELLOW_EX +
+                  "\nThe username you have entered is not valid, \
+please try again.\n")
+
 
 def intro_page():
     """
        Introductory screen for the user
     """
-    print(Fore.LIGHTGREEN_EX + Style.BRIGHT + "Welcome to the mortgage calculator!\n")
+    print(Fore.LIGHTGREEN_EX + Style.BRIGHT +
+          "Welcome to the mortgage calculator!\n")
     print(Fore.LIGHTCYAN_EX + Style.BRIGHT + """\
         `'::.
     _________H ,%%&%,
    /\     _   \%&&%%&%
   /  \___/^\___\%&%%&&
   |  | []   [] |%\Y&%'
-  |  |   .-.   | ||  
+  |  |   .-.   | ||
 ~~@._|@@_|||_@@|~||~~~~~~~~~~~~~\n""")
     print("This program allows you to enter your financial details")
     print("and see the costs associated with your mortgage.\n")
     while True:
-        print("To get started, please enter 1 if you have saved details in the mortgage calculator.")
-        print("Enter 2 if you have not previously saved your information in the mortgage calculator.\n")
+        print("To get started, please enter 1 if you have saved details \
+\nin the mortgage calculator.")
+        print("Enter 2 if you have not previously saved your information \
+\nin the mortgage calculator.\n")
 
         type = input("Please enter your choice here:\n")
 
