@@ -54,20 +54,20 @@ MortgageB = MortgageCalculator(4.0, 30, 250000)
 MortgageC = MortgageCalculator(4.5, 30, 250000)
 
 all_mortgages = {
-                "interest rate (%)": [
+                "interest (%)": [
                     MortgageA.interest, MortgageB.interest, MortgageC.interest
                 ],
-                "term (years)": [
+                "term (yrs)": [
                     MortgageA.years, MortgageB.years, MortgageC.years
                 ],
-                "loan value ($)": [
+                "value ($)": [
                     MortgageA.mortgage, MortgageB.mortgage, MortgageC.mortgage
                 ],
                 "monthly payment ($)": [
                     MortgageA.monthly_payment, MortgageB.monthly_payment,
                     MortgageC.monthly_payment
                 ],
-                "total repaid ($)": [
+                "total paid ($)": [
                     MortgageA.total_repayment, MortgageB.total_repayment,
                     MortgageC.total_repayment
                 ],
