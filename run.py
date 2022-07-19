@@ -42,7 +42,7 @@ class MortgageCalculator:
         """
         return f"{Fore.LIGHTCYAN_EX}{Style.BRIGHT}A {self.years}-year mortgage \
 for a total amount borrowed of ${self.mortgage} at an interest \
-rate of {self.interest}%\nhas a monthly payment amount of \
+rate \nof {self.interest}% has a monthly payment amount of \
 ${self.monthly_payment}.\n\nThe total amount repaid on \
 this mortgage by the end of the term \
 will be ${self.total_repayment}.\n"
