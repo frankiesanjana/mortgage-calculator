@@ -53,6 +53,26 @@ MortgageA = MortgageCalculator(4.0, 20, 250000)
 MortgageB = MortgageCalculator(4.0, 30, 250000)
 MortgageC = MortgageCalculator(4.5, 30, 250000)
 
+all_mortgages = {
+                "interest rate (%)": [
+                    MortgageA.interest, MortgageB.interest, MortgageC.interest
+                ],
+                "term (years)": [
+                    MortgageA.years, MortgageB.years, MortgageC.years
+                ],
+                "loan value ($)": [
+                    MortgageA.mortgage, MortgageB.mortgage, MortgageC.mortgage
+                ],
+                "monthly payment ($)": [
+                    MortgageA.monthly_payment, MortgageB.monthly_payment,
+                    MortgageC.monthly_payment
+                ],
+                "total repaid ($)": [
+                    MortgageA.total_repayment, MortgageB.total_repayment,
+                    MortgageC.total_repayment
+                ],
+            }
+
 
 def choose_example():
     """
@@ -82,9 +102,9 @@ example mortgages.\n")
         elif choice == "c":
             print(MortgageC.definition())
         elif choice == "d":
-            print(MortgageA.definition())
-            print(MortgageB.definition())
-            print(MortgageC.definition())
+            df = pd.DataFrame(all_mortgages)
+            example_mortgages = df.to_string(index=False)
+            print(f"{Fore.LIGHTCYAN_EX }{Style.BRIGHT}\n{example_mortgages}\n")
         elif choice == "x":
             welcome_user()
             break
