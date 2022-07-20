@@ -1,6 +1,6 @@
 """
-Import external libraries for the program
-Connect APIs and allow access via credentials file
+Imports external libraries for the program
+Connects APIs and allow access via credentials file
 """
 import gspread
 from google.oauth2.service_account import Credentials
@@ -48,11 +48,17 @@ this mortgage by the end of the term \
 will be ${self.total_repayment}.\n"
 
 
-# Defines some example mortgages to display to the user
+"""
+Defines some example mortgages to display to the user
+"""
 MortgageA = MortgageCalculator(4.0, 20, 250000)
 MortgageB = MortgageCalculator(4.0, 30, 250000)
 MortgageC = MortgageCalculator(4.5, 30, 250000)
 
+"""
+Creates a dictionary of the example mortgages
+This is used to display all examples together
+"""
 all_mortgages = {
                 "interest (%)": [
                     MortgageA.interest, MortgageB.interest, MortgageC.interest
@@ -125,7 +131,7 @@ def save_details():
         print(Fore.LIGHTRED_EX + Style.BRIGHT +
               "Would you like to save these details?\n")
         print("Type 's' to save these details for future use.")
-        print("Type 'a' to input some alternative details.")
+        print("Type 'a' to input some alternative details without saving.")
         print("Type 'x' to return to the main menu.")
         print("Type 'z' to exit the mortgage calculator.")
 
@@ -264,8 +270,11 @@ def retrieve_saved_details():
         print(Fore.LIGHTGREEN_EX + Style.BRIGHT +
               "\nThe details you currently have saved are:\n")
         df = pd.DataFrame(stored_data.get_all_records())
+        # The following line of code was adjusted by Ger 
+        # at Code Institute Tutor Support, to help remove
+        # the index number from the table that is displayed
         user_record = df.loc[df['username'] == username].to_string(index=False)
-        print(user_record)
+        print(f"{Fore.LIGHTCYAN_EX }{Style.BRIGHT}\n{user_record}\n")
         while True:
             print("\nWhat would you like to do next?")
             print("Type 'a' to input further details.")

@@ -16,6 +16,8 @@ The program has been developed to provide a solution for the following user stor
 ### User Stories
 
 - As a new visitor, I want to understand quickly what the program is for.
+- As a new or returning visitor who is interested in taking out a mortgage, I want to input my details and learn what my monthly repayment will be.
+- As a new or returning visitor who is interested in taking out a mortgage, I want to input my details and learn what the total repaid over the lifetime of the mortgage will be. I am then able to choose a higher monthly repayment if I can afford to do so, in order to minimise the total amount that I will have to pay.
 - As a new or returning visitor, I want the program to be simple to use and easy to understand.
 - As a new or returning visitor, I want the program to work, even if I make a mistake in entering information.
 - As a new or returning visitor, I want it to be easy to exit the app when I am done using it.
@@ -80,3 +82,55 @@ The program generally aims for consistency. For example, menu options for the us
 There are also several extra line breaks inserted into the code, with the aim of breaking up the text printed to the terminal to make it more readable.
 
 ## Features
+
+### UX Features
+
+## Data Model
+
+class / OOP
+
+Google Sheet
+
+Notes on the code
+
+## Technologies Used
+- explain why each library is used, what it does
+- incl excel and ppt for test model and logic flow diagram
+
+## Testing
+
+### Manual Testing
+- note on how code was written with testing as I went along
+- spreadsheet with all logic tests
+
+### PEP8 Testing
+
+### Lighthouse Testing
+
+## Bugs
+
+### Current Bugs
+
+### Resolved Bugs
+
+## Development
+
+### GitHub
+
+### GitPod
+
+### Google Sheets
+- incl sheet creation process and API Credentials
+
+## Deployment
+
+### Heroku
+
+## Credits
+
+### General Python skills
+
+### Specific to the project 
+- how to do the mortgage calculation in Excel
+
+### Acknowledgements
