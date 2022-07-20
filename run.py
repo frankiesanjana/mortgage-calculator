@@ -45,7 +45,7 @@ for a total amount borrowed of ${self.mortgage} at an interest \
 \nrate of {self.interest}% has a monthly payment amount of \
 ${self.monthly_payment}.\n\nThe total amount repaid on \
 this mortgage by the end of the term \
-will be ${self.total_repayment}.\n"
+will be \n${self.total_repayment}.\n"
 
 
 """

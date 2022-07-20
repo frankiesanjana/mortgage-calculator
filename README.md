@@ -21,9 +21,9 @@ The program has been developed to provide a solution for the following user stor
 - As a new or returning visitor, I want the program to be simple to use and easy to understand.
 - As a new or returning visitor, I want the program to work, even if I make a mistake in entering information.
 - As a new or returning visitor, I want it to be easy to exit the app when I am done using it.
-- As a new visitor, I want to create a username that is unique to me and that I can use to store my details for future use.
+- As a new visitor, I want to create a username that is unique to me and that I can use to store my details for future use. When I return, I want my username to be quickly found so that I am recognised.
 - As a returning visitor, I want to quickly and simply retrieve my details.
-- As a new or returning visitor, I want any details that I store to be stored securely.
+- As a new or returning visitor, I want to be able to save my details and for these details to be stored securely.
 - As a user who is considering several mortgage options or considering refinancing an existing mortgage, I would like to view some examples that are similar but have some differences, so that I can better understand the implications of these differences on the monthly payment and lifetime repayments of a potential mortgage. (For example, extending the term of a mortgage will decrease the monthly payment but increase the total lifetime repayment.)
 
 ### Owner Goals
@@ -83,7 +83,61 @@ There are also several extra line breaks inserted into the code, with the aim of
 
 ## Features
 
-### UX Features
+### UX and User Stories
+
+"As a new visitor, I want to understand quickly what the program is for."  
+"As a new or returning visitor, I want the program to be simple to use and easy to understand."
+
+- The introductory page welcomes users to the mortgage calculator and briefly states its functionality. The ASCII art of a house provides an at-a-glance impression of the topic of the program.
+
+<img src="assets/images/features-intro.png" alt="View of terminal on starting screen of the application">
+
+"As a new or returning visitor who is interested in taking out a mortgage, I want to input my details and learn what my monthly repayment will be."  
+"As a new or returning visitor who is interested in taking out a mortgage, I want to input my details and learn what the total repaid over the lifetime of the mortgage will be. I am then able to choose a higher monthly repayment if I can afford to do so, in order to minimise the total amount that I will have to pay."  
+"As a new or returning visitor, I want to be able to save my details and for these details to be stored securely."
+
+- The user is given an explanation and example showing how to input their details for the calculator to work.
+
+<img src="assets/images/features-input-details.png" alt="View of terminal on screen requesting user details">
+
+- When the details have been entered, the monthly payment and total repayment are calculated and displayed to the user.  
+- The user is then offered the option of saving these details, which is done using a Google spreadsheet that is linked to the program via an API.
+
+<img src="assets/images/features-input-result.png" alt="View of terminal on screen showing results details and offering save option">
+
+"As a new visitor, I want to create a username that is unique to me and that I can use to store my details for future use. When I return, I want my username to be quickly found so that I am recognised."
+
+- New visitors are asked to create a username and given the requirements for the username. This is checked against the database and rejected if it already exists.
+
+<img src="assets/images/features-new-username.png" alt="View of terminal on screen showing new username creation and check against database">
+
+"As a returning visitor, I want to quickly and simply retrieve my details."
+
+- Returning visitors are taken to the main menu, from where they can select the option to view their saved details.
+
+<img src="assets/images/features-view-saved.png" alt="View of terminal on screen showing retrieval of stored details">
+
+"As a new or returning visitor, I want the program to work, even if I make a mistake in entering information."
+
+- If a user enters an invalid input, they are informed of this and instructed to try again. The options are then repeated to them.
+
+<img src="assets/images/features-invalid.png" alt="View of terminal on screen showing a user input error and the error message displayed">
+
+"As a user who is considering several mortgage options or considering refinancing an existing mortgage, I would like to view some examples that are similar but have some differences, so that I can better understand the implications of these differences on the monthly payment and lifetime repayments of a potential mortgage. (For example, extending the term of a mortgage will decrease the monthly payment but increase the total lifetime repayment.)"
+
+- The example mortgages saved in the calculator provide some examples of similar mortgages with small differences, which illustrate the impact that seemingly small changes can have on monthly and total repayments.
+- Examples can be viewed singly or all together in a table.
+
+<img src="assets/images/features-single-example.png" alt="View of terminal on screen showing a single example mortgage description">
+
+<img src="assets/images/features-all-examples.png" alt="View of terminal on screen showing all example mortgages displayed in a table">
+
+"As a new or returning visitor, I want it to be easy to exit the app when I am done using it."
+
+- Menu screens have the option of exiting the program at multiple points; the user does not need to return to the main menu in order to exit, but can also exit from the main menu.
+- When exiting, the user is thanked for using the program.
+
+<img src="assets/images/features-goodbye.png" alt="View of terminal on screen showing user choice to exit and goodbye message">
 
 ## Data Model
 
