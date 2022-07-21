@@ -235,15 +235,15 @@ I spent some time adjusting the code so that the lines were shorter than 80 char
 
 ### Current Bugs
 
-To the best of my knowledge, the program does not have any current bugs.
+- To the best of my knowledge, the program does not have any current bugs.
 
 ### Resolved Bugs
 
-When I created the functions `welcome_user` and `choose_example` they were initially in this order. The `welcome_user` function was not able to call the `choose_example` function because the function had not yet been defined. Once I adjusted the ordering of the functions within the python file it worked as intended.
+- When I created the functions `welcome_user` and `choose_example` they were initially in this order. The `welcome_user` function was not able to call the `choose_example` function because the function had not yet been defined. Once I adjusted the ordering of the functions within the python file it worked as intended.
 
-In the `enter_details` function, I initially defined the variables `user_interest`, `user_years` and `user_amount` outside the `try`. However, this meant that the error trap did not correctly pick up instances where the user entered values that were not comma-separated. Once I realised this during testing, it was simple to move the line of code where these are defined inside the `try` and it then worked correctly.
+- In the `enter_details` function, I initially defined the variables `user_interest`, `user_years` and `user_amount` outside the `try`. However, this meant that the error trap did not correctly pick up instances where the user entered values that were not comma-separated. Once I realised this during testing, it was simple to move the line of code where these are defined inside the `try` and it then worked correctly.
 
-When retrieving user details from the Google Sheet, I wanted it to display the results without an index number. I tried adding `reset_index()` and `index_col=False` to the code, but these led to error messages. Eventually I made use of Code Institute Tutor Support, where the folllowing solution was suggested to me and is now used in the code: `user_record = df.loc[df['username'] == username].to_string(index=False)`.
+- When retrieving user details from the Google Sheet, I wanted it to display the results without an index number. I tried adding `reset_index()` and `index_col=False` to the code, but these led to error messages. Eventually I made use of Code Institute Tutor Support, where the folllowing solution was suggested to me and is now used in the code: `user_record = df.loc[df['username'] == username].to_string(index=False)`.
 
 ## Build and Deployment
 
@@ -339,7 +339,21 @@ The project was deployed to [Heroku](https://www.heroku.com/).
 
 ### General Python skills
 
+- I referred to a number of YouTube videos, articles and tutorials to better understand why to use classes in Python, how to use Pandas and how to use Colorama. Those I referred to most are as follows:
+    - Keith Galli's tutorials on YouTube, especially on [classes](https://www.youtube.com/watch?v=tmY6FEF8f1o&t=1825s&ab_channel=KeithGalli) and [Pandas](https://www.youtube.com/watch?v=vmEHCJofslg&ab_channel=KeithGalli).
+    - A tutorial on Colorama that can be seen [here](https://www.youtube.com/watch?v=u51Zjlnui4Y&ab_channel=TechWithTim).
+    - An article on reading dataframes from Pandas from Google Sheets [here](https://practicaldatascience.co.uk/data-science/how-to-read-google-sheets-data-in-pandas-with-gspread).
+
+- I also made extensive use of the Love Sandwiches tutorials on [Code Institute](https://codeinstitute.net/)
+
 ### Specific to the project 
-- how to do the mortgage calculation in Excel
+
+- Thanks to Ger at Code Institute Tutor Support for adjusting my code to remove the index number displaying in tables using Pandas DataFrame with the following piece of code: `user_record = df.loc[df['username'] == username].to_string(index=False)`.
+- The [Code Institute Python Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) on GitHub was used to develop this project.
+- [This article](https://medium.com/swlh/simple-mortgage-calculator-with-python-and-excel-b98dede36720) was used to develop the mortgage calculator in Excel and to understand the PMT formula.
+- The ASCII art used in the program is taken from [this website](https://www.asciiart.eu/buildings-and-places/houses).
 
 ### Acknowledgements
+
+- Thank you to my mentor Dick Vlaanderen for project guidance and review.
+- Thanks to my fellow students for support, advice and encouragement via Slack.
