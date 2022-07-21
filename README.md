@@ -179,7 +179,7 @@ A Google Sheet is used to store details entered by users and the mortgage inform
 
 ### Other Technologies
 
-- [MS Excel](https://www.microsoft.com/en-ww/microsoft-365/excel): since I have vastly more experience with MS Excel than with Python, I built out the mortgage calculations in Excel quickly before starting to code. This helped to enable that the logic flow was clear in my mind before starting, and provided a cross-check for the financial calculations:
+- [MS Excel](https://www.microsoft.com/en-ww/microsoft-365/excel): since I have vastly more experience with MS Excel than with Python, I built out the mortgage calculations in Excel quickly before starting to code. This helped to ensure that the logic flow was clear in my mind before starting, and provided a cross-check for the financial calculations:
 
 <img src="assets/images/calculator-excel.png" alt="View of mortgage calculation in MS Excel">
 
