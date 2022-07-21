@@ -64,13 +64,17 @@ The structure of the program can be seen in the flowchart below, which was creat
 
 The user will experience the program as a series of multiple-choice menus. They will interact with the program by selecting their choice and pressing Enter.
 
+Due to the nature of this project, the wireframes are extremely simple:
+
+<img src="assets/images/wireframe.png" alt="Wireframe of the project as it appears in a browser window">
+
 ### Plane 5: Surface
 
 The aims at the surface level are to make the program straightforward and enjoyable to read and use. The following points were designed with this in mind:
 
 #### Colours
 
-Colours for text have been imported from the Python library [Colorama](https://pypi.org/project/colorama/) and each colour used consistently for certain functions. For example, green is used to greet the user or at the start of a menu; yellow is used for error messages (red was considered but decided to be too harsh). 
+Colours for text have been imported from the Python library [colorama](https://pypi.org/project/colorama/) and each colour used consistently for certain functions. For example, green is used to greet the user or at the start of a menu; yellow is used for error messages (red was considered but decided to be too harsh). 
 
 #### Media
 
@@ -141,15 +145,51 @@ There are also several extra line breaks inserted into the code, with the aim of
 
 ## Data Model
 
-class / OOP
+### Object Oriented Programming
 
-Google Sheet
+The program uses Object Oriented Programming in the main functionality of the calculator. The mortgage calculations are done by creating a class called MortgageCalculator. This takes the variables of interest rate, term and value of the mortgage, and uses the NumPy Financial function `pmt` to calculate the monthly repayment on that mortgage. From this, since we know the total duration of the mortgage, it is simple to calculate the total repayment over the lifetime of the mortgage.
 
-Notes on the code
+The example mortgages used in the program are instances of this class, as are any mortgages entered by users.
+
+### Google Sheet
+
+A Google Sheet is used to store details entered by users and the mortgage information that is calculated by the MortgageCalculator class using these details. The sheet uses a single worksheet "database" to store these details:
+
+<img src="assets/images/google-sheet.png" alt="View of Google Sheet storing user details">
 
 ## Technologies Used
-- explain why each library is used, what it does
-- incl excel and ppt for test model and logic flow diagram
+
+### Python Libraries
+
+- [colorama](https://pypi.org/project/colorama/) is used to print text to the terminal in different colours and styles.
+- [gspread](https://pypi.org/project/gspread/) is used to communicate with Google Sheets.
+- [google.oauth2.service_account](https://google-auth.readthedocs.io/en/stable/index.html) Credentials is imported from this library to validate credentials and grant access to Google service accounts.
+- [numpy financial](https://pypi.org/project/numpy-financial/) is used to perform the calculations for the monthly mortgage payment via the `pmt`function.
+- [pandas](https://pypi.org/project/pandas/) is used to display data in tables to make it clear for the user to read. This is done when retrieving stored user details from the database, as well as when displaying all the example mortgages together.
+
+### Other Technologies
+
+- [MS Excel](https://www.microsoft.com/en-ww/microsoft-365/excel): since I have vastly more experience with MS Excel than with Python, I built out the mortgage calculations in Excel quickly before starting to code. This helped to enable that the logic flow was clear in my mind before starting, and provided a cross-check for the financial calculations:
+
+<img src="assets/images/calculator-excel.png" alt="View of mortgage calculation in MS Excel">
+
+- [MS PowerPoint](https://www.microsoft.com/en-us/microsoft-365/powerpoint) was used to draw out the logic flow of the program.
+
+- [Balsamiq](https://balsamiq.com/) was used to create wireframes for the project.
+
+- [Amiresponsive](http://ami.responsivedesign.is/) was used to create the image at the top of this document.
+
+- [Gitpod](https://www.gitpod.io/) is an online integrated development environment that was used to write my code.
+
+- [Git](https://git-scm.com/) was used for version control by committing changes via Gitpod. Changes are then stored by pushing them to GitHub.
+
+- [GitHub](https://github.com/) was used to store the project code after pushing it from Git.
+
+- [Heroku](https://www.heroku.com/) is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud, and was used to deploy the live project.
+
+- [Google Sheets](https://www.google.com/sheets/about/) was used to securely store user data entered in the project.
+
+- [PEP8 online](http://pep8online.com/) was used to validate Python code.
 
 ## Testing
 

@@ -270,7 +270,7 @@ def retrieve_saved_details():
         print(Fore.LIGHTGREEN_EX + Style.BRIGHT +
               "\nThe details you currently have saved are:\n")
         df = pd.DataFrame(stored_data.get_all_records())
-        # The following line of code was adjusted by Ger 
+        # The following line of code was adjusted by Ger
         # at Code Institute Tutor Support, to help remove
         # the index number from the table that is displayed
         user_record = df.loc[df['username'] == username].to_string(index=False)
