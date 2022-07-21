@@ -143,6 +143,16 @@ There are also several extra line breaks inserted into the code, with the aim of
 
 <img src="assets/images/features-goodbye.png" alt="View of terminal on screen showing user choice to exit and goodbye message">
 
+### Other Notes on Features of the Code
+
+The following notes relate to some features that are present in the code and / or can be seen in the program:
+
+- I chose to keep all of the values as floats rather than ints because it is possible that a user might want to input an amount borrowed that also includes cents. For example, if there are costs added by an agent, these might well not come to a whole dollar – perhaps if they are a percentage of some other amount. Similarly, although I am not aware of mortgages that do not run for a whole number of years, it is possible that they exist (or will do so in the future), or a user may want to view details of a hypothetical loan that runs for a non-integer number of years.
+
+- I have also not restricted the amount borrowed, interest or number of years to a narrow range that is normal for a mortgage in order that the calculator can be used for other modelling if desired. For example, details of a small loan or a higher interest rate than is plausible for a mortgage could be entered into the calculator and it would still work as intended.
+
+- The number of years and the amount borrowed are restricted to being positive numbers only, since we do not plan to model borrowing a negative amount of money (this would effectively be a savings account, which could be modelled in a separate program) and time does not run backwards. However, it is theoretically possible for interest rates on mortgages to be negative and indeed this has even happened on rare occasion; see [this link](https://www.theguardian.com/money/2019/aug/13/danish-bank-launches-worlds-first-negative-interest-rate-mortgage) for an example. For this reason I have allowed users to input negative interest rates.
+
 ## Data Model
 
 ### Object Oriented Programming
@@ -194,31 +204,136 @@ A Google Sheet is used to store details entered by users and the mortgage inform
 ## Testing
 
 ### Manual Testing
-- note on how code was written with testing as I went along
-- spreadsheet with all logic tests
+
+The program was tested continuously in the Gitpod terminal during its development. As functions were created, they could first be tested by using print statements to check that they were being called correctly. When writing an `if` statement, this was tested by first using print statements after `if` `elif` and `else`, and then replacing each print statement with the actual code to be executed. In this way I was able to avoid the scenario where a function was completely written but then discovered not to work, since this could present difficulty in isolating the cause of the problem for debugging. I also checked when details were saved to the Google Sheet in the program that the details were correctly stored in the sheet.
+
+Once the program had been successfully deployed to Heroku, I followed the logic flow through all the user actions that can be taken in the app to check that it responded appropriately:
+
+<img src="assets/images/testing-one.png" alt="View of steps taken to test the programme, first screen">
+<br>
+<img src="assets/images/testing-two.png" alt="View of steps taken to test the programme, second screen">  
+<br>
+<img src="assets/images/testing-three.png" alt="View of steps taken to test the programme, third screen">
 
 ### PEP8 Testing
 
-### Lighthouse Testing
+The Python code was run through [PEP8 online](http://pep8online.com/):
+
+<img src="assets/images/validator-one.png" alt="View of PEP8 testing, first screen">
+
+Initially I obtained a large number of "line too long" errors, as well as one place where a function did not have two blank lines before it but only one, and one "trailing whitespace" error that was part of the ASCII art:
+
+<img src="assets/images/validator-two.png" alt="View of PEP8 testing, second screen">
+<br>
+<img src="assets/images/validator-three.png" alt="View of PEP8 testing, third screen">
+
+I spent some time adjusting the code so that the lines were shorter than 80 characters, inserted an extra blank line before the function, and was able to adjust the ASCII art without affecting the way it displayed. The code then passed through the validator successfully:
+
+<img src="assets/images/validator-four.png" alt="View of PEP8 testing, fourth screen">
 
 ## Bugs
 
 ### Current Bugs
 
+To the best of my knowledge, the program does not have any current bugs.
+
 ### Resolved Bugs
 
-## Development
+When I created the functions `welcome_user` and `choose_example` they were initially in this order. The `welcome_user` function was not able to call the `choose_example` function because the function had not yet been defined. Once I adjusted the ordering of the functions within the python file it worked as intended.
 
-### GitHub
+In the `enter_details` function, I initially defined the variables `user_interest`, `user_years` and `user_amount` outside the `try`. However, this meant that the error trap did not correctly pick up instances where the user entered values that were not comma-separated. Once I realised this during testing, it was simple to move the line of code where these are defined inside the `try` and it then worked correctly.
 
-### GitPod
+When retrieving user details from the Google Sheet, I wanted it to display the results without an index number. I tried adding `reset_index()` and `index_col=False` to the code, but these led to error messages. Eventually I made use of Code Institute Tutor Support, where the folllowing solution was suggested to me and is now used in the code: `user_record = df.loc[df['username'] == username].to_string(index=False)`.
 
-### Google Sheets
-- incl sheet creation process and API Credentials
+## Build and Deployment
 
-## Deployment
+### Gitpod and GitHub
+
+The [Code Institute Python Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) on GitHub was used to develop this project. This template was designed by [Code Institute](https://codeinstitute.net/) to provide a terminal that can be viewed in the browser.
+
+Steps:
+- From the link above, click "use this template". You will be taken to a screen to create a new repository from this template.
+- Give your repository a name and, optionally, a description.
+- Click "create repository from template" and your repository will be created.
+- In the new repository, click the green "Gitpod" button to open the workspace in Gitpod.
+
+### Specifics for a project including Google Sheets
+
+Credentials must be generated and provided to the program to allow the project to access Google Sheets.
+
+Steps to generate the credentials:
+- Navigate to the Google Cloud Platform
+- Click "select a project".
+- Click "new project".
+- Give the project a name.
+- Click "create".
+- From the project's dashboard, select 'APIs and services' and then 'Library'.
+- Search for Google Drive API and enable it.
+- Select "create credentials".
+- From the "Which API are you using?" dropdown menu, choose "Google Drive API".
+- For the "What data will you be accessing?" question, select "Application Data".
+- For the "Are you planning to use this API with Compute Engine, Kubernetes Engine, App Engine, or Cloud Functions?" question, select "No, I'm not using them".
+- Click "Next".
+- Enter a Service Account name.
+- In the Role Dropdown box choose Basic > Editor then press Continue.
+- Click "Done".
+- On the next page, click on the Service Account that has been created.
+- On the next page, click on the Keys tab.
+- Click on the Add Key dropdown and select Create New Key
+- Select JSON and then click Create. This will trigger the json file with your API credentials in it to download to your machine.
+
+Steps to allow the program access using the credentials:
+- Drag and drop the downloaded json file containing the credentials into your Gitpod workspace.
+- Rename the file to creds.json for ease of use.
+- In the creds.json file, find the "client_email" value and copy the email address (without the surrounding quotes).
+- In the Google Sheet, click the green "share" button in the top right.
+- Paste in the email, make sure "Editor" is selected, untick "Notify People", and then click "Share".
+
+Steps to ensure that the credentials file is stored securely and details are not shared with GitHub:
+- Open the "gitignore" file in Gitpod.
+- Add "creds.json" (without the quotes) to the gitignore file and save the file.
+
+For Google Sheets itself, the steps are:
+
+- Return to the project's dashboard in the Google Cloud Platform, select 'APIs and services' and then 'Library'.
+- Search for "Google Sheets" and enable it.
+- There is no need for credentials here.
 
 ### Heroku
+
+The project was deployed to [Heroku](https://www.heroku.com/).
+
+- Before using Heroku, create a list of any dependencies that have been installed in your workspace by using the command "pip3 freeze > requirements.txt" in the terminal. This will modify the requirements.txt file to allow Heroku to install these dependencies as well.
+- Log in to Heroku or create an account if required.
+- Click the button labelled "New" from the dashboard in the top right corner, just below the header:
+
+<img src="assets/images/heroku-new.png" alt="View of Heroku new button">
+
+- From the drop-down menu select "Create new app".
+- Enter a unique app name. Note that unlike GitHub, the name must be unique across all of Heroku, not just unique to your own account.
+- Once the green tick is displayed to confirm the name is original, select your region.
+- Click on the "Create app" button.
+- This will bring you to the project "Deploy" tab. From here, navigate to the settings tab and scroll down to the "Config Vars" section.
+- Click the button labelled "Reveal Config Vars" and enter the "key" as port, the "value" as 8000 and click the "add" button.
+- For projects such as this where a `creds.json` file is used, the Config Vars must also be updated to take account of this file, since it cannot be shared via GitHub because it was never uploaded to GitHub.
+- In the field for "key", enter CREDS.
+- Copy the entire creds.json file from the workspace and then paste it into the "value" and click the "add" button.
+
+<img src="assets/images/config-vars.png" alt="View of Config Vars on Heroku">
+
+- Go to the "buildpacks" section of the settings page and click the button labeled "add buildpack," select "python," and click "Save Changes".
+- Repeat the above step, but this time add "node.js" instead of python.
+- Note that the buildpacks must be in the correct order. They can be dragged into the correct position if needed.
+
+<img src="assets/images/buildpacks.png" alt="View of buildpacks on Heroku">
+
+- At the top of the settings page, and navigate to the "Deploy" tab.
+- Select Github as the deployment method.
+- Confirm that you want to connect to GitHub.
+- Search for the repository name as it is saved on GitHub, and click the "connect" button next to the correct repository.
+- At the bottom of the deploy page, select your "Enable Automatic Deploys" if you would like updates to be deployed automatically when you push updates to Github.
+- Alternatively, click the "Deploy Branch" button to deploy updates manually. This would then need to be updated manually with any further changes.
+- Click "view" to view the deployed site.
 
 ## Credits
 
