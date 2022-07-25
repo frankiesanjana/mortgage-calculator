@@ -87,7 +87,7 @@ The only media that has been incorporated into the project is ASCII art of a hou
 
 #### Presentation
 
-The program generally aims for consistency. For example, menu options for the user are kept in as similar an option as possible, and where it makes sense to do so the same key is used for the same option throughout the program. For example, if the user wants to exit the program they will always select ‘z’ to do this, whichever menu they are choosing this option from.
+The program generally aims for consistency. For example, menu options for the user are kept in as similar an order as possible, and where it makes sense to do so the same key is used for the same option throughout the program. For example, if the user wants to exit the program they will always select ‘z’ to do this, whichever menu they are choosing this option from.
 There are also several extra line breaks inserted into the code, with the aim of breaking up the text printed to the terminal to make it more readable.
 
 ## Features
@@ -158,17 +158,21 @@ The following notes relate to some features that are present in the code and / o
 
 - The number of years and the amount borrowed are restricted to being positive numbers only, since we do not plan to model borrowing a negative amount of money (this would effectively be a savings account, which could be modelled in a separate program) and time does not run backwards. However, it is theoretically possible for interest rates on mortgages to be negative and indeed this has even happened on rare occasion; see [this link](https://www.theguardian.com/money/2019/aug/13/danish-bank-launches-worlds-first-negative-interest-rate-mortgage) for an example. For this reason I have allowed users to input negative interest rates.
 
+- There are two features that may appear superfluous, but have both been incorporated in order to prevent users from becoming stuck if they accidentally enter one detail incorrectly:
+    - When a user selects "returning user" from the introductory screen, they are taken to a screen to enter their existing username. However, if the name is not then found in the database they will be asked to enter it again. If they have gone to this screen by mistake, there is an option for them to enter 'n' and instead create a new username.
+    - When a user chooses to input their mortgage details, they are taken to a screen to confirm this by pressing 'a'. This acts as a check before taking them to the input screen, where they need to enter the interest rate, term and total amount borrowed in their mortgage.
+
 ## Data Model
 
 ### Object Oriented Programming
 
-The program uses Object Oriented Programming in the main functionality of the calculator. The mortgage calculations are done by creating a class called MortgageCalculator. This takes the variables of interest rate, term and value of the mortgage, and uses the NumPy Financial function `pmt` to calculate the monthly repayment on that mortgage. From this, since we know the total duration of the mortgage, it is simple to calculate the total repayment over the lifetime of the mortgage.
+The program uses Object Oriented Programming in the main functionality of the calculator. An object is created called MortgageCalculator and the calculations are done by this object. It takes the variables of interest rate, term and value of the mortgage, and uses the NumPy Financial function `pmt` to calculate the monthly repayment on that mortgage. From this, since we know the total duration of the mortgage, it is simple to calculate the total repayment over the lifetime of the mortgage.
 
 The example mortgages used in the program are instances of this class, as are any mortgages entered by users.
 
 ### Google Sheet
 
-A Google Sheet is used to store details entered by users and the mortgage information that is calculated by the MortgageCalculator class using these details. The sheet uses a single worksheet "database" to store these details:
+A Google Sheet is used to store details entered by users and the mortgage information that is calculated by the MortgageCalculator object using these details. The sheet uses a single worksheet named "database" as a database to store these details:
 
 <img src="assets/images/google-sheet.png" alt="View of Google Sheet storing user details">
 
@@ -207,6 +211,22 @@ A Google Sheet is used to store details entered by users and the mortgage inform
 - [PEP8 online](http://pep8online.com/) was used to validate Python code.
 
 ## Testing
+
+### Calculation Testing
+
+Firstly, it was important to make sure that the calculator was producing the correct results. I had built the calculator first in MS Excel before writing the Python code, so the first step was to compare results between the two:
+
+<img src="assets/images/python-check.png" alt="View of results in Python">
+<br>
+<img src="assets/images/excel-check.png" alt="View of results in Excel">
+
+As can be seen in these screenshots, I compared the results of the example mortgages, as well as in a mortgage that was entered into the program by a user. There are some small rounding errors, but the numbers otherwise match perfectly.
+
+As an additional check, I entered the details of one mortgage into [an existing mortgage calculator](https://www.mortgagecalculator.org/). I have added yellow arrows to mark the inputs and green to mark the outputs for ease of identification:
+
+<img src="assets/images/online-check.png" alt="View of results in online calculator">
+
+Again, the numbers match those produced by the current Mortgage Calculator program.
 
 ### Manual Testing
 

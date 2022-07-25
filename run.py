@@ -210,7 +210,7 @@ def own_details():
         print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}You have chosen to input details \
 and view the resulting mortgage costs.\n")
         print("Please select from the following options:")
-        print("Type 'a' to continue to input your details.")
+        print("Type 'a' to confirm that you wish to input your details.")
         print("Type 'x' to return to the main menu.")
         print("Type 'z' to exit the mortgage calculator.")
 
