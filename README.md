@@ -1,10 +1,12 @@
 # Mortgage Calculator
 
-Mortgage Calculator is a program designed for users who are interested in taking out a mortgage. When considering taking out a mortgage, most users' primary concern is what the monthly payment will be on that mortgage, so that customers can be sure that they can afford to make this payment each month. Once that criterion has been met, some customers also wish to look at the total repayment over the lifetime of the mortgage so that they are not paying back more than they have to in total.
+Mortgage Calculator is a program designed for users who are interested in taking out a mortgage.
+- When considering taking out a mortgage, most users' primary concern is what the monthly payment will be on that mortgage, in order to be sure that they can afford to make this payment each month.
+- Once that criterion has been met, some users also wish to look at the total repayment over the lifetime of the mortgage so that they are not paying back more than they have to in total.
 
 In the mortgage calculator, users can therefore enter the parameters of a potential mortgage and see what their monthly payment would be, as well as the total amount repaid over the lifetime of the mortgage.
 
-Users can choose to save these details and return to view them at a later date. At this point the user can also add details of further mortgages if desired.
+Users can choose to save these details and return to view them at a later date. The user can also add details of further mortgages if desired.
 
 The program can equally be used to look at options for refinancing an existing mortgage, and also contains some examples of preset mortgages.
 
@@ -166,7 +168,7 @@ The following notes relate to some features that are present in the code and / o
 
 ### Object Oriented Programming
 
-The program uses Object Oriented Programming in the main functionality of the calculator. An object is created called MortgageCalculator and the calculations are done by this object. It takes the variables of interest rate, term and value of the mortgage, and uses the NumPy Financial function `pmt` to calculate the monthly repayment on that mortgage. From this, since we know the total duration of the mortgage, it is simple to calculate the total repayment over the lifetime of the mortgage.
+The program uses Object Oriented Programming in the main functionality of the calculator. An object is created called MortgageCalculator and this object is used to do the calculations. It takes the variables of interest rate, term and value of the mortgage, and uses the NumPy Financial function `pmt` to calculate the monthly repayment on that mortgage. From this, since we know the total duration of the mortgage, it is simple to calculate the total repayment over the lifetime of the mortgage.
 
 The example mortgages used in the program are instances of this class, as are any mortgages entered by users.
 
@@ -381,9 +383,10 @@ The project was deployed to [Heroku](https://www.heroku.com/).
 `user_record = df.loc[df['username'] == username].to_string(index=False)`.
 - The [Code Institute Python Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) on GitHub was used to develop this project.
 - [This article](https://medium.com/swlh/simple-mortgage-calculator-with-python-and-excel-b98dede36720) was used to develop the mortgage calculator in Excel and to understand the PMT formula.
-- The ASCII art used in the program is taken from [this website](https://www.asciiart.eu/buildings-and-places/houses).
+- The ASCII art used in the program is taken from [ASCII Art](https://www.asciiart.eu/buildings-and-places/houses). It was adjusted slightly in order for it to display as intended in the terminal.
 
 ### Acknowledgements
 
 - Thank you to my mentor Dick Vlaanderen for project guidance and review.
+- Thank you to Shane Muirhead and Enrique C for user testing of the project and providing feedback.
 - Thanks to my fellow students for support, advice and encouragement via Slack.
