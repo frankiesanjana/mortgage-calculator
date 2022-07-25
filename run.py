@@ -100,7 +100,7 @@ example mortgages.\n")
         print("Type 'z' to exit the mortgage calculator.")
 
         choice = input("Enter your selection here:\n")
-
+        choice = choice.lower()
         if choice == "a":
             print(MortgageA.definition())
         elif choice == "b":
@@ -136,7 +136,7 @@ def save_details():
         print("Type 'z' to exit the mortgage calculator.")
 
         save = input("Enter your selection here:\n")
-
+        save = save.lower()
         if save == "s":
             list_details = [
                 username, UserMortgage.interest,
@@ -215,7 +215,7 @@ and view the resulting mortgage costs.\n")
         print("Type 'z' to exit the mortgage calculator.")
 
         choice = input("Enter your selection here:\n")
-
+        choice = choice.lower()
         if choice == "a":
             enter_details()
             break
@@ -244,7 +244,7 @@ Welcome to the main menu, {username}!\n")
         print("Type 'z' to exit the mortgage calculator.\n")
 
         choice = input("Enter your selection here:\n")
-
+        choice = choice.lower()
         if choice == "a":
             choose_example()
             break
@@ -282,7 +282,7 @@ def retrieve_saved_details():
             print("Type 'z' to exit the mortgage calculator.")
 
             choice = input("Enter your selection here:\n")
-
+            choice = choice.lower()
             if choice == "a":
                 enter_details()
                 break
@@ -313,7 +313,7 @@ def returning_user():
         global username
         username = input("Enter your username here:\n")
 
-        if username == 'n':
+        if username == 'n' or username == 'N':
             new_username()
             break
         elif stored_data.find(username, in_column=1):
