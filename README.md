@@ -1,6 +1,11 @@
 # Mortgage Calculator
 
-Mortgage Calculator is a program designed for users who are interested in taking out a mortgage. Users can enter the parameters of a potential mortgage and see what their monthly payment would be, as well as the total amount repaid over the lifetime of the mortgage. Users can choose to save these details and return to view them at a later date.
+Mortgage Calculator is a program designed for users who are interested in taking out a mortgage. When considering taking out a mortgage, most users' primary concern is what the monthly payment will be on that mortgage, so that customers can be sure that they can afford to make this payment each month. Once that criterion has been met, some customers also wish to look at the total repayment over the lifetime of the mortgage so that they are not paying back more than they have to in total.
+
+In the mortgage calculator, users can therefore enter the parameters of a potential mortgage and see what their monthly payment would be, as well as the total amount repaid over the lifetime of the mortgage.
+
+Users can choose to save these details and return to view them at a later date. At this point the user can also add details of further mortgages if desired.
+
 The program can equally be used to look at options for refinancing an existing mortgage, and also contains some examples of preset mortgages.
 
 The program is written using Python, runs in a Command Line Interface and is deployed via Heroku. You can visit the live website [here](https://p3-mortgage-calculator.herokuapp.com/).
@@ -231,6 +236,10 @@ I spent some time adjusting the code so that the lines were shorter than 80 char
 
 <img src="assets/images/validator-four.png" alt="View of PEP8 testing, fourth screen">
 
+### User Testing
+
+Users reported that the program was easy to use and successful at notifying them when they had inputted an incorrect value. One suggestion was to allow uppercase values as well as lowercase values as user inputs. For example, if a user enters `A` instead of `a` the program should still accept this as a correct choice. This adjustment has been made in the code and tested as working correctly.
+
 ## Bugs
 
 ### Current Bugs
@@ -348,7 +357,8 @@ The project was deployed to [Heroku](https://www.heroku.com/).
 
 ### Specific to the project 
 
-- Thanks to Ger at Code Institute Tutor Support for adjusting my code to remove the index number displaying in tables using Pandas DataFrame with the following piece of code: `user_record = df.loc[df['username'] == username].to_string(index=False)`.
+- Thanks to Ger at Code Institute Tutor Support for adjusting my code to remove the index number displaying in tables using Pandas DataFrame with the following piece of code:  
+`user_record = df.loc[df['username'] == username].to_string(index=False)`.
 - The [Code Institute Python Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) on GitHub was used to develop this project.
 - [This article](https://medium.com/swlh/simple-mortgage-calculator-with-python-and-excel-b98dede36720) was used to develop the mortgage calculator in Excel and to understand the PMT formula.
 - The ASCII art used in the program is taken from [this website](https://www.asciiart.eu/buildings-and-places/houses).
